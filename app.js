@@ -3,6 +3,9 @@ const app = express();
 
 const mongoose = require("mongoose");
 
+const dotenv = require("dotenv");
+dotenv.config();
+
 // middleware
 const filmsRoute = require("./routes/films");
 
@@ -11,10 +14,8 @@ app.use("/films", filmsRoute);
 app.get("/", (req,res) => {
     res.send("Homepage");
 });
-// delete before push
-const MURL = "";
 
-mongoose.connect(MURL).then(() => {
+mongoose.connect(process.env.MONGODB_URL).then(() => {
     console.log("Your mongoDB connector is on...");
 });
 
